@@ -255,11 +255,8 @@ jobs:
           if-no-files-found: error
 
   
-  core-result:
-    runs-on: ubuntu-latest
-    needs: [ pre_job, build_web, build, build_magisk ]
-    if: needs.pre_job.result == 'success' && needs.pre_job.outputs.should_skip != 'true' && !cancelled()
-    steps:
-      - name: Mark result as failed
-        if: contains(needs.*.result, 'failure')
-        run: exit 1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: easytier-core
+          path: */easytier-core
