@@ -253,10 +253,3 @@ jobs:
           name: signpath-signed-${{ matrix.ARTIFACT_NAME }}
           path: ./signpath-signed-artifacts/*
           if-no-files-found: error
-
-  
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: easytier-core
-          path: **/easytier-core
