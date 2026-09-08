@@ -259,4 +259,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: easytier-core
-          path: */easytier-core
+          path: **/easytier-core
