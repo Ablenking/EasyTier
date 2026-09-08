@@ -1,0 +1,58 @@
+name: Build mipsel for OpenIPC(T31) minimal‑p2p‑udp
+on:
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    env:
+      TARGET: mipsel-unknown-linux-musl
+      ARTIFACT_NAME: easytier-linux-mipsel-v2.6.4
+    steps:
+      - name: Checkout source v2.6.4
+        uses: actions/checkout@v4
+        with:
+          ref: v2.6.4
+
+      - name: Install musl‑cross‑make mipsel toolchain
+        uses: messense/musl-cross-make-action@v1
+        with:
+          targets: mipsel-unknown-linux-musl
+
+      - name: Install nightly rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - name: Cargo clean
+        run: cargo clean
+
+      - name: Build minimal easytier‑core（仅P2P打洞+TUN，无http/web）
+        run: |
+          RUSTFLAGS="-C target-feature=+crt-static" \
+          cargo build \
+            -Z build-std=std,core,alloc,compiler_builtins \
+            -Z build-std-features=compiler-builtins-mem \
+            --target ${{ env.TARGET }} \
+            --release \
+            -p easytier \
+            --bin easytier-core
+
+      - name: Cross strip
+        run: |
+          export GCC_PREFIX=mipsel-unknown-linux-musl
+          ${GCC_PREFIX}-strip ./target/${{ env.TARGET }}/release/easytier-core
+
+      - name: Package artifact
+        run: |
+          mkdir -p out
+          cp ./target/${{ env.TARGET }}/release/easytier-core ./out/
+          cd out
+          zip ${{ env.ARTIFACT_NAME }}.zip easytier-core
+
+      - name: Upload build zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: out/easytier-linux-mipsel-v2.6.4.zip
