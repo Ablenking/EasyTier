@@ -330,7 +330,7 @@ default = [
 #    "zstd",
 #    "upnp",
 #    "icmp-proxy",
-#    "management",
+    "management",
 #    "endpoint-discovery",
 #    "extended-services",
     "linux-netlink",
