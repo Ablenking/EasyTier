@@ -317,6 +317,7 @@ tokio-socks = "0.5.2"
 
 [features]
 default = [
+    "aes-gcm"
 #    "wireguard",
 #    "websocket",
 #    "smoltcp",
@@ -329,9 +330,9 @@ default = [
 #    "zstd",
 #    "upnp",
 #    "icmp-proxy",
-    "management",
+#    "management",
 #    "endpoint-discovery",
-    "extended-services",
+#    "extended-services",
     "linux-netlink",
 #    "tcp-hole-punch",
 ]
