@@ -1,4 +1,4 @@
-name: EasyTier Core
+name: For OpenIPC
 
 on:
   workflow_dispatch:
