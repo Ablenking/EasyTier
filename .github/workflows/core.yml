@@ -128,7 +128,7 @@ jobs:
         env:
           RUSTC_BOOTSTRAP: 1
         run: |
-          cargo build -r --target $TARGET -Z build-std=std,panic_abort --package=easytier --features=jemalloc
+          cargo build -r --target $TARGET -Z build-std=std,panic_abort --package=easytier --bin easytier-core --bin easytier-cli  --features=jemalloc
 
       - name: Compress
         run: |
