@@ -178,7 +178,7 @@ jobs:
             fi
           done
 
-          mv ./artifacts/objects/* ./artifacts/
+          # mv ./artifacts/objects/* ./artifacts/
           rm -rf ./artifacts/objects/
 
       - name: Archive artifact
