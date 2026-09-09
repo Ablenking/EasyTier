@@ -44,9 +44,22 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          #- TARGET: mips-unknown-linux-musl
-           # OS: ubuntu-24.04
-          #  ARTIFACT_NAME: linux-mips
+        
+          - TARGET: armv7-unknown-linux-musleabihf # raspberry pi 2-3-4, not tested
+            OS: ubuntu-24.04
+            ARTIFACT_NAME: linux-armv7hf
+          - TARGET: armv7-unknown-linux-musleabi # raspberry pi 2-3-4, not tested
+            OS: ubuntu-24.04
+            ARTIFACT_NAME: linux-armv7
+          - TARGET: arm-unknown-linux-musleabihf # raspberry pi 0-1, not tested
+            OS: ubuntu-24.04
+            ARTIFACT_NAME: linux-armhf
+          - TARGET: arm-unknown-linux-musleabi # raspberry pi 0-1, not tested
+            OS: ubuntu-24.04
+            ARTIFACT_NAME: linux-arm
+          - TARGET: mips-unknown-linux-musl
+            OS: ubuntu-24.04
+            ARTIFACT_NAME: linux-mips
           - TARGET: mipsel-unknown-linux-musl
             OS: ubuntu-24.04
             ARTIFACT_NAME: linux-mipsel
@@ -119,7 +132,7 @@ jobs:
             FEATURES="jemalloc"
           fi
           #  cargo $BUILD --release --target $TARGET --package=easytier-web --features=embed
-          cargo $BUILD --release --target $TARGET  --features=embed
+          cargo $BUILD --release --target $TARGET   --bin easytier-core --bin easytier-cli 
           #  mv ./target/$TARGET/release/easytier-web"$SUFFIX" ./target/$TARGET/release/easytier-web-embed"$SUFFIX"
           cargo $BUILD --release --target $TARGET --features=$FEATURES
 
