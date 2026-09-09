@@ -317,7 +317,7 @@ tokio-socks = "0.5.2"
 
 [features]
 default = [
-    "aes-gcm"
+    "aes-gcm",
 #    "wireguard",
 #    "websocket",
 #    "smoltcp",
