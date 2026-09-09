@@ -132,7 +132,7 @@ jobs:
             FEATURES="jemalloc"
           fi
           #  cargo $BUILD --release --target $TARGET --package=easytier-web --features=embed
-          cargo $BUILD --release --target $TARGET   --bin easytier-core --bin easytier-cli -p easytier
+          cargo $BUILD --release --target $TARGET   --bin easytier-core --bin easytier-cli 
           #  mv ./target/$TARGET/release/easytier-web"$SUFFIX" ./target/$TARGET/release/easytier-web-embed"$SUFFIX"
           cargo $BUILD --release --target $TARGET --features=$FEATURES
 
