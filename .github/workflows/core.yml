@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   pre_job:
-    # continue-on-error: true # Uncomment once integration is finished
+    # continue-on-error: true #  Uncomment once integration is finished
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     # Map a step output to a job output
