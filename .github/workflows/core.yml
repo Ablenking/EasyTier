@@ -167,8 +167,7 @@ jobs:
             cp "${UPX_PKG}/upx" .
             UPX_BIN=./upx
           fi
-          # for BIN in ./target/$TARGET/release/easytier-{core,cli,web,web-embed}"$SUFFIX"; do
-          for BIN in ./target/$TARGET/release/easytier-{core,cli}"$SUFFIX"; do
+          for BIN in ./target/$TARGET/release/easytier-{core,cli,web,web-embed}"$SUFFIX"; do
             if [[ -f "$BIN" ]]; then
               if [[ -n "$UPX_BIN" ]]; then
                 $UPX_BIN --lzma --best "$BIN" || true
@@ -178,7 +177,7 @@ jobs:
             fi
           done
 
-          # mv ./artifacts/objects/* ./artifacts/
+          mv ./artifacts/objects/* ./artifacts/
           rm -rf ./artifacts/objects/
 
       - name: Archive artifact
